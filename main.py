@@ -8,8 +8,10 @@ SCREEN_HEIGHT = 1080
 screen = pygame.display.set_mode((1920, 1080))
 pygame.FULLSCREEN | pygame.SCALED | pygame.NOFRAME
 
+# create player character and border
 player = pygame.Rect(65, 70, 15, 15)
 game_border = pygame.Rect(0, 0, 1920, 1080)
+
 # safe zones
 outside_UL_safezone = pygame.Rect(0, 0, 150, 150)
 outside_UR_safezone = pygame.Rect(1770, 0, 150, 150)
@@ -21,6 +23,10 @@ lr_second_level_safezone = pygame.Rect(1620, 780, 150, 150)
 ll_second_level_safezone = pygame.Rect(150, 780, 150, 150)
 ul_third_level_safezone = pygame.Rect(150, 300, 150, 150)
 ur_third_level_safezone = pygame.Rect(1470, 300, 150, 150)
+
+# goal zone
+goal = pygame.Rect(1320, 450, 150, 180)
+
 # lanes
 bottomlane = pygame.Rect(0, 930, 1980, 150)
 leftlane = pygame.Rect(0, 0, 150, 1980)
@@ -35,11 +41,24 @@ third_level_finallane = pygame.Rect(300, 450, 1320, 330)
 movement_speed = float(2)
 run = True
 
+# walls for player collision
+# wall1 = pygame.Line((0, 150), (1770, 150), 3)
+# wall2 = 
+# wall3 =
+# wall4 = 
+# wall5 = 
+# wall6 = 
+# wall7 =
+# wall8 =
+# wall9 =
+# wall10 = 
+# wall11 =
+
 while run:
     # background color
     screen.fill('black')
     
-    # draw lanes and safe zones
+    # draw lanes, safe zones, and goal
     pygame.draw.rect(screen, ('white'), toplane)
     pygame.draw.rect(screen, ('white'), rightlane)
     pygame.draw.rect(screen, ('white'), bottomlane)
@@ -60,8 +79,24 @@ while run:
     pygame.draw.rect(screen, ('gray46'), ll_second_level_safezone)    
     pygame.draw.rect(screen, ('gray23'), ul_third_level_safezone)
     pygame.draw.rect(screen, ('gray23'), ur_third_level_safezone)
+    pygame.draw.rect(screen, 'black', goal)
     pygame.draw.rect(screen, ('black'), (game_border), 1)
     
+    # Wall Lines
+    pygame.draw.line(screen, 'black', (0, 150), (1770, 150), 3)
+    pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)
+    pygame.draw.line(screen, 'black', (1770, 930), (150, 930), 3)
+    pygame.draw.line(screen, 'black', (150, 930), (150, 300), 3)
+    pygame.draw.line(screen, 'black', (150, 300), (1620, 300), 3)
+    pygame.draw.line(screen, 'black', (1620, 300), (1620, 780), 3)
+    pygame.draw.line(screen, 'black', (1620, 780), (300, 780), 3)
+    pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)
+    pygame.draw.line(screen, 'black', (300, 450), (1470, 450) , 3)
+    pygame.draw.line(screen, 'black', (1470, 450), (1470,630), 3)
+    pygame.draw.line(screen, 'black', (1470,630), (450, 630), 3)
+
+
+
     pygame.draw.rect(screen, ('red'), player)
 
         
