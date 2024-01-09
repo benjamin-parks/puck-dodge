@@ -8,6 +8,14 @@ SCREEN_HEIGHT = 1080
 
 screen = pygame.display.set_mode((1920, 1080))
 
+#import and play music
+file = "assets\James Bond-ScoutingForGirls.mp3"
+pygame.mixer.init()
+pygame.mixer.music.load(file)
+pygame.mixer.music.play()
+pygame.mixer.music.set_volume(0.01)
+pygame.event.wait()
+
 # create player character and border
 player = pygame.Rect(65, 70, 15, 15)
 game_border = pygame.Rect(0, 0, 1920, 1080)
@@ -104,6 +112,7 @@ while run:
         player.move_ip(0, 0)
     elif key[pygame.K_w] and key[pygame.K_s]:
         player.move_ip(0, 0)
+    
     
     # Movement Keybinds
     if key[pygame.K_a] == True and player.left >= 0:
