@@ -354,6 +354,10 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
+    # Force Close Game
+    if key[pygame.K_ESCAPE] == True:
+        run = False
+      
     pygame.display.update()
 
 pygame.quit()
