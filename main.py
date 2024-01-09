@@ -1,6 +1,7 @@
 import pygame
 
 pygame.init()
+pygame.display.set_caption('Puck Dodge')
 
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
@@ -38,21 +39,9 @@ second_level_bottomlane = pygame.Rect(150, 780, 1620, 150)
 second_level_leftlane = pygame.Rect(150, 300, 150, 500)
 third_level_toplane = pygame.Rect(150, 300, 1470, 150)
 third_level_finallane = pygame.Rect(300, 450, 1320, 330)
-movement_speed = float(2)
+movement_speed = float(6.0)
 run = True
 
-# walls for player collision
-# wall1 = pygame.Line((0, 150), (1770, 150), 3)
-# wall2 = 
-# wall3 =
-# wall4 = 
-# wall5 = 
-# wall6 = 
-# wall7 =
-# wall8 =
-# wall9 =
-# wall10 = 
-# wall11 =
 
 while run:
     # background color
@@ -105,9 +94,9 @@ while run:
     if key[pygame.K_a] and key[pygame.K_s] and player.bottom <= 1080 and player.left >= 0:
         player.move_ip(-(0.5 * movement_speed), 0.5 * movement_speed)
     elif key[pygame.K_w] and key[pygame.K_a] and player.top > 0 and player.left >= 0:
-        player.move_ip(-(0.5 * movement_speed), -(0.5 * movement_speed))
+        player.move_ip((-0.5 * movement_speed), (-0.5 * movement_speed))
     elif key[pygame.K_w] and key[pygame.K_d] and player.top > 0 and player.right < 1920:
-        player.move_ip(0.5 * movement_speed, -(0.5 * movement_speed))
+        player.move_ip(0.5 * movement_speed, (-0.5 * movement_speed))
     elif key[pygame.K_d] and key[pygame.K_s] and player.bottom <= 1080 and player.right < 1920:
         player.move_ip(0.5 * movement_speed, (0.5 * movement_speed))
     elif key[pygame.K_a] and key[pygame.K_d]:
@@ -125,7 +114,226 @@ while run:
     elif key[pygame.K_d] == True and player.right < 1920:
         player.move_ip(movement_speed, 0)
    
-             
+   # Top Wall Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (0, 150), (1770, 150), 3)):
+        if key[pygame.K_s] == True:
+            player.move_ip(0, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (0, 150), (1770, 150), 3)):
+        if key[pygame.K_d] and key[pygame.K_s] == True:
+            player.move_ip((0.6 * movement_speed), -(movement_speed))
+    if player.colliderect(pygame.draw.line(screen, 'black', (0, 150), (1770, 150), 3)):
+        if key[pygame.K_a] and key[pygame.K_s] and player.bottom:
+            player.move_ip((0.6 * movement_speed), -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (0, 150), (1770, 150), 3)):
+        if key[pygame.K_w] == True:
+            player.move_ip(0, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (0, 150), (1770, 150), 3)):
+        if key[pygame.K_w] and key[pygame.K_d] == True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (0, 150), (1770, 150), 3)):
+        if key[pygame.K_w] and key[pygame.K_a] == True:
+            player.move_ip(movement_speed, movement_speed)
+
+    # Outside Right Wall Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)):
+        if key[pygame.K_a] == True:
+            player.move_ip(movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)):
+        if key[pygame.K_a] and key[pygame.K_s]== True:
+            player.move_ip(movement_speed, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)):
+        if key[pygame.K_a] and key[pygame.K_w]== True:
+            player.move_ip(movement_speed, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)):
+        if key[pygame.K_d] == True:
+            player.move_ip(-movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)):
+        if key[pygame.K_d] and key[pygame.K_s]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)):
+        if key[pygame.K_d] and key[pygame.K_w]== True:
+            player.move_ip(-movement_speed, movement_speed)
+            
+    # Outside Bottom Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 930), (150, 930), 3)):
+        if key[pygame.K_s] == True:
+            player.move_ip(0, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 930), (150, 930), 3)):
+        if key[pygame.K_d] and key[pygame.K_s] == True:
+            player.move_ip((0.6 * movement_speed), -(movement_speed))
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 930), (150, 930), 3)):
+        if key[pygame.K_a] and key[pygame.K_s] and player.bottom:
+            player.move_ip((0.6 * movement_speed), -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 930), (150, 930), 3)):
+        if key[pygame.K_w] == True:
+            player.move_ip(0, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 930), (150, 930), 3)):
+        if key[pygame.K_w] and key[pygame.K_d] == True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1770, 930), (150, 930), 3)):
+        if key[pygame.K_w] and key[pygame.K_a] == True:
+            player.move_ip(movement_speed, movement_speed)
+
+    # Outside Left Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 930), (150, 300), 3)):
+        if key[pygame.K_a] == True:
+            player.move_ip(movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 930), (150, 300), 3)):
+        if key[pygame.K_a] and key[pygame.K_s]== True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 930), (150, 300), 3)):
+        if key[pygame.K_a] and key[pygame.K_w]== True:
+            player.move_ip(movement_speed, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 930), (150, 300), 3)):
+        if key[pygame.K_d] == True:
+            player.move_ip(-movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 930), (150, 300), 3)):
+        if key[pygame.K_d] and key[pygame.K_s]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 930), (150, 300), 3)):
+        if key[pygame.K_d] and key[pygame.K_w]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    
+    # Second Layer Top Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 300), (1620, 300), 3)):
+        if key[pygame.K_s] == True:
+            player.move_ip(0, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 300), (1620, 300), 3)):
+        if key[pygame.K_d] and key[pygame.K_s] == True:
+            player.move_ip((0.6 * movement_speed), -(movement_speed))
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 300), (1620, 300), 3)):
+        if key[pygame.K_a] and key[pygame.K_s] and player.bottom:
+            player.move_ip((0.6 * movement_speed), -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 300), (1620, 300), 3)):
+        if key[pygame.K_w] == True:
+            player.move_ip(0, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 300), (1620, 300), 3)):
+        if key[pygame.K_w] and key[pygame.K_d] == True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (150, 300), (1620, 300), 3)):
+        if key[pygame.K_w] and key[pygame.K_a] == True:
+            player.move_ip(movement_speed, movement_speed)
+    
+    # Second Layer Right Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 300), (1620, 780), 3)):
+        if key[pygame.K_a] == True:
+            player.move_ip(movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 300), (1620, 780), 3)):
+        if key[pygame.K_a] and key[pygame.K_s]== True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 300), (1620, 780), 3)):
+        if key[pygame.K_a] and key[pygame.K_w]== True:
+            player.move_ip(movement_speed, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 300), (1620, 780), 3)):
+        if key[pygame.K_d] == True:
+            player.move_ip(-movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 300), (1620, 780), 3)):
+        if key[pygame.K_d] and key[pygame.K_s]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 300), (1620, 780), 3)):
+        if key[pygame.K_d] and key[pygame.K_w]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    
+    # Second Layer Bottom
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 780), (300, 780), 3)):
+        if key[pygame.K_s] == True:
+            player.move_ip(0, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 780), (300, 780), 3)):
+        if key[pygame.K_d] and key[pygame.K_s] == True:
+            player.move_ip((0.6 * movement_speed), -(movement_speed))
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 780), (300, 780), 3)):
+        if key[pygame.K_a] and key[pygame.K_s] and player.bottom:
+            player.move_ip((0.6 * movement_speed), -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 780), (300, 780), 3)):
+        if key[pygame.K_w] == True:
+            player.move_ip(0, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 780), (300, 780), 3)):
+        if key[pygame.K_w] and key[pygame.K_d] == True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1620, 780), (300, 780), 3)):
+        if key[pygame.K_w] and key[pygame.K_a] == True:
+            player.move_ip(movement_speed, movement_speed)
+    
+    # Outside Left Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
+        if key[pygame.K_a] == True:
+            player.move_ip(movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
+        if key[pygame.K_a] and key[pygame.K_s]== True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
+        if key[pygame.K_a] and key[pygame.K_w]== True:
+            player.move_ip(movement_speed, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
+        if key[pygame.K_d] == True:
+            player.move_ip(-movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
+        if key[pygame.K_d] and key[pygame.K_s]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
+        if key[pygame.K_d] and key[pygame.K_w]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    
+    # Third Level Top Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 450), (1470, 450) , 3)):
+        if key[pygame.K_s] == True:
+            player.move_ip(0, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 450), (1470, 450) , 3)):
+        if key[pygame.K_d] and key[pygame.K_s] == True:
+            player.move_ip((0.6 * movement_speed), -(movement_speed))
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 450), (1470, 450) , 3)):
+        if key[pygame.K_a] and key[pygame.K_s] and player.bottom:
+            player.move_ip((0.6 * movement_speed), -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 450), (1470, 450) , 3)):
+        if key[pygame.K_w] == True:
+            player.move_ip(0, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 450), (1470, 450) , 3)):
+        if key[pygame.K_w] and key[pygame.K_d] == True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (300, 450), (1470, 450) , 3)):
+        if key[pygame.K_w] and key[pygame.K_a] == True:
+            player.move_ip(movement_speed, movement_speed)
+    
+    # Third Layer Right Collisions
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470, 450), (1470,630), 3)):
+        if key[pygame.K_a] == True:
+            player.move_ip(movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470, 450), (1470,630), 3)):
+        if key[pygame.K_a] and key[pygame.K_s]== True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470, 450), (1470,630), 3)):
+        if key[pygame.K_a] and key[pygame.K_w]== True:
+            player.move_ip(movement_speed, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470, 450), (1470,630), 3)):
+        if key[pygame.K_d] == True:
+            player.move_ip(-movement_speed, 0)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470, 450), (1470,630), 3)):
+        if key[pygame.K_d] and key[pygame.K_s]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470, 450), (1470,630), 3)):
+        if key[pygame.K_d] and key[pygame.K_w]== True:
+            player.move_ip(-movement_speed, movement_speed)
+    
+    # Final Layer Bottom
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470,630), (450, 630), 3)):
+        if key[pygame.K_s] == True:
+            player.move_ip(0, -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470,630), (450, 630), 3)):
+        if key[pygame.K_d] and key[pygame.K_s] == True:
+            player.move_ip((0.6 * movement_speed), -(movement_speed))
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470,630), (450, 630), 3)):
+        if key[pygame.K_a] and key[pygame.K_s] and player.bottom:
+            player.move_ip((0.6 * movement_speed), -movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470,630), (450, 630), 3)):
+        if key[pygame.K_w] == True:
+            player.move_ip(0, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470,630), (450, 630), 3)):
+        if key[pygame.K_w] and key[pygame.K_d] == True:
+            player.move_ip(movement_speed, movement_speed)
+    if player.colliderect(pygame.draw.line(screen, 'black', (1470,630), (450, 630), 3)):
+        if key[pygame.K_w] and key[pygame.K_a] == True:
+            player.move_ip(movement_speed, movement_speed)
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
