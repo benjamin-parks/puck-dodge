@@ -140,7 +140,7 @@ while run:
             player.move_ip(movement_speed, 0)
     if player.colliderect(pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)):
         if key[pygame.K_a] and key[pygame.K_s]== True:
-            player.move_ip(movement_speed, -movement_speed)
+            player.move_ip(movement_speed, movement_speed)
     if player.colliderect(pygame.draw.line(screen, 'black', (1770, 150), (1770, 930), 3)):
         if key[pygame.K_a] and key[pygame.K_w]== True:
             player.move_ip(movement_speed, -movement_speed)
