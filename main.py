@@ -7,7 +7,6 @@ SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 
 screen = pygame.display.set_mode((1920, 1080))
-pygame.FULLSCREEN | pygame.SCALED | pygame.NOFRAME
 
 # create player character and border
 player = pygame.Rect(65, 70, 15, 15)
@@ -34,12 +33,14 @@ leftlane = pygame.Rect(0, 0, 150, 1980)
 rightlane = pygame.Rect(1770, 0, 150, 1080)
 toplane = pygame.Rect(0, 0, 1920, 150)
 second_level_toplane = pygame.Rect(0, 150, 1770, 150)
-second_level_rightlane = pygame.Rect(1620,150, 150, 780)
+second_level_rightlane = pygame.Rect(1620, 150, 150, 780)
 second_level_bottomlane = pygame.Rect(150, 780, 1620, 150)
 second_level_leftlane = pygame.Rect(150, 300, 150, 500)
 third_level_toplane = pygame.Rect(150, 300, 1470, 150)
 third_level_finallane = pygame.Rect(300, 450, 1320, 330)
-movement_speed = float(6.0)
+
+
+movement_speed = float(2)
 run = True
 
 
@@ -68,7 +69,7 @@ while run:
     pygame.draw.rect(screen, ('gray46'), ll_second_level_safezone)    
     pygame.draw.rect(screen, ('gray23'), ul_third_level_safezone)
     pygame.draw.rect(screen, ('gray23'), ur_third_level_safezone)
-    pygame.draw.rect(screen, 'black', goal)
+    pygame.draw.rect(screen, 'red', goal)
     pygame.draw.rect(screen, ('black'), (game_border), 1)
     
     # Wall Lines
@@ -80,13 +81,13 @@ while run:
     pygame.draw.line(screen, 'black', (1620, 300), (1620, 780), 3)
     pygame.draw.line(screen, 'black', (1620, 780), (300, 780), 3)
     pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)
-    pygame.draw.line(screen, 'black', (300, 450), (1470, 450) , 3)
-    pygame.draw.line(screen, 'black', (1470, 450), (1470,630), 3)
-    pygame.draw.line(screen, 'black', (1470,630), (450, 630), 3)
+    pygame.draw.line(screen, 'black', (300, 450), (1470, 450), 3)
+    pygame.draw.line(screen, 'black', (1470, 450), (1470, 630), 3)
+    pygame.draw.line(screen, 'black', (1470, 630), (450, 630), 3)
 
 
 
-    pygame.draw.rect(screen, ('red'), player)
+    pygame.draw.rect(screen, ('green4'), player)
 
         
     # Diagonal Movement Keybinds
@@ -259,10 +260,10 @@ while run:
         if key[pygame.K_a] == True:
             player.move_ip(movement_speed, 0)
     if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
-        if key[pygame.K_a] and key[pygame.K_s]== True:
+        if key[pygame.K_a] and key[pygame.K_s] == True:
             player.move_ip(movement_speed, movement_speed)
     if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
-        if key[pygame.K_a] and key[pygame.K_w]== True:
+        if key[pygame.K_a] and key[pygame.K_w] == True:
             player.move_ip(movement_speed, -movement_speed)
     if player.colliderect(pygame.draw.line(screen, 'black', (300, 780), (300, 450), 3)):
         if key[pygame.K_d] == True:
@@ -334,6 +335,12 @@ while run:
         if key[pygame.K_w] and key[pygame.K_a] == True:
             player.move_ip(movement_speed, movement_speed)
     
+
+    # Reach end of level
+    if player.colliderect(goal) is True:
+        pygame.Rect.update(player, 65, 65, 15, 15)
+
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
